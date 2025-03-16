@@ -10,6 +10,23 @@ import ProfileScreen from '../Profile';
 
 const Tab = createBottomTabNavigator();
 
+const getTabBarIcon = (routeName: string, color: string, size?: number) => {
+  let iconName: string;
+
+  switch (routeName) {
+    case 'Home':
+      iconName = 'home-outline';
+      break;
+    case 'Profile':
+      iconName = 'person-outline';
+      break;
+    default:
+      iconName = 'ellipsis-horizontal';
+  }
+
+  return <Icon name={iconName} size={size || 24} color={color} />;
+};
+
 const Navbar = () => (
   <NavigationContainer>
     <Tab.Navigator
@@ -19,22 +36,7 @@ const Navbar = () => (
         tabBarLabelStyle: styles.tabBarLabel,
         tabBarActiveTintColor: '#4CAF50',
         tabBarInactiveTintColor: '#fff',
-        tabBarIcon: ({color, size}) => {
-          let iconName: string;
-
-          switch (route.name) {
-            case 'Home':
-              iconName = 'home';
-              break;
-            case 'Profile':
-              iconName = 'person';
-              break;
-            default:
-              iconName = 'ellipse-outline';
-          }
-
-          return <Icon name={iconName} size={size || 24} color={color} />;
-        },
+        tabBarIcon: ({color, size}) => getTabBarIcon(route.name, color, size),
       })}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
