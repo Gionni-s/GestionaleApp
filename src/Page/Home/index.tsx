@@ -18,7 +18,9 @@ const SAMPLE_ITEMS = [
 ];
 
 const HomeScreen = () => {
-  const [expiringItems, setExpiringItems] = useState([]);
+  const [expiringItems, setExpiringItems] = useState<
+    {id: String; name: String; expiryDate: String; daysLeft: Number}[]
+  >([]);
 
   useEffect(() => {
     // Filter items expiring within 7 days
@@ -50,7 +52,8 @@ const HomeScreen = () => {
       }>
       <View style={styles.alertContent}>
         <Icon
-          name={item.daysLeft <= 1 ? 'warning' : 'time-outline'}
+          // Cambia questa linea usando nomi di icone validi
+          name={item.daysLeft <= 1 ? 'alert-circle-outline' : 'time-outline'}
           size={24}
           color={getAlertColor(item.daysLeft)}
         />
@@ -79,7 +82,7 @@ const HomeScreen = () => {
           <FlatList
             data={expiringItems}
             renderItem={renderExpiryItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id as string}
             style={styles.alertsList}
           />
         </View>

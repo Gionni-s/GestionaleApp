@@ -3,6 +3,14 @@ import Store from '../store';
 
 const API_BASE_URL: string = 'https://gestionale-latest.onrender.com';
 
+export interface ApiCall<T, TFormData> {
+  get(params?: string): Promise<T[]>;
+  getById(id: string, params?: string): Promise<T>;
+  post(body: TFormData): Promise<T>;
+  put(id: string, body: TFormData): Promise<T>;
+  delete(id: string): Promise<void>;
+}
+
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000, // Timeout of 10 seconds

@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 // Screens
 import HomeScreen from '../Home';
 import ProfileScreen from '../Profile';
+import LabelsScreen from '../Label';
 
 // Define tab page configuration type
 type TabPage = {
@@ -26,6 +27,12 @@ const TAB_PAGES: TabPage[] = [
     component: HomeScreen,
     icon: 'home-outline',
     options: {headerTitle: 'Home', headerShown: false},
+  },
+  {
+    name: 'Label',
+    component: LabelsScreen,
+    icon: 'pricetags-outline',
+    options: {headerTitle: 'Label', headerShown: false},
   },
   {
     name: 'Profile',
