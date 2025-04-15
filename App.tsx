@@ -15,6 +15,7 @@ function App(): React.JSX.Element {
     const checkToken = async () => {
       try {
         const storedToken = await Store.getData('token');
+        console.log(storedToken);
         setToken(storedToken);
       } catch (error) {
         console.error('Errore nel recupero del token:', error);

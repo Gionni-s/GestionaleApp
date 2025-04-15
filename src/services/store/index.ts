@@ -21,7 +21,7 @@ export default class Store {
     try {
       const jsonValue = JSON.stringify(value);
       console.log(key, jsonValue);
-      await AsyncStorage.setItem('my-key', jsonValue);
+      await AsyncStorage.setItem(key, jsonValue); // Fixed: using variable key instead of hardcoded 'my-key'
     } catch (e: any) {
       Alert.alert(
         'Errore',
@@ -52,6 +52,41 @@ export default class Store {
       Alert.alert(
         'Errore',
         e.response?.data?.message || 'Qualcosa è andato storto',
+      );
+      return null;
+    }
+  }
+
+  /**
+   * Removes data for the specified key from AsyncStorage
+   * @param key Key to remove from storage
+   * @returns true if successful, null if error occurred
+   */
+  static async removeData(key: string) {
+    try {
+      await AsyncStorage.removeItem(key);
+      return true;
+    } catch (e: any) {
+      Alert.alert(
+        'Errore',
+        e.response?.data?.message || 'Impossibile rimuovere i dati',
+      );
+      return null;
+    }
+  }
+
+  /**
+   * Clears all data from AsyncStorage
+   * @returns true if successful, null if error occurred
+   */
+  static async clearAllData() {
+    try {
+      await AsyncStorage.clear();
+      return true;
+    } catch (e: any) {
+      Alert.alert(
+        'Errore',
+        e.response?.data?.message || 'Impossibile cancellare tutti i dati',
       );
       return null;
     }
